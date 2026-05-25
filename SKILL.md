@@ -1,6 +1,6 @@
 ---
 name: ayla-saas-admin-ui-ux-pro
-description: Ayla SaaS Admin UI/UX Pro — build pixel-faithful admin panel screens using a clean, blue-accented analytics dashboard design system. 280px sidebar, 1560px content grid, Public Sans typography, and a documented catalogue of 30+ screens (dashboards, calendar, kanban, file manager, profile, settings, invoice, billing, pricing, FAQs, auth, blank page) plus reusable components (sidebar, top nav, breadcrumbs, footer, stat cards, six table variants, full form-element set, buttons). Use this skill whenever the user asks to build, scaffold, mock up, or generate an admin dashboard / admin panel / back-office UI / analytics dashboard / SaaS console / internal tool — even when they just say "make me an admin dashboard" without naming a specific style. Triggers on "Ayla", "Ayla admin", "Ayla SaaS", or "Ayla UI" as the house brand name. Especially useful when the user asks for a sidebar-and-cards layout or specific screens like login, register, billing, kanban, calendar, invoice, pricing plans, or settings. Always read the relevant reference file(s) before writing code; do not guess at colors, spacing, or component anatomy.
+description: Aescription: Build Ayla SaaS admin dashboard screens using the blue-accented admin design system: 280px sidebar, Public Sans, cards, tables, forms, auth, billing, kanban, calendar, settings, and analytics layouts. Use when the user asks for Ayla, an admin panel, back-office UI, SaaS console, internal tool, or analytics dashboard.
 compatibility:
   - claude-code
   - codex-cli
