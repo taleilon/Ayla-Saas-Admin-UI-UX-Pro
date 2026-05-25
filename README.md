@@ -35,15 +35,20 @@ ayla-saas-admin-ui-ux-pro/
     ├── tables.md                  # All 6 table variants + universal CSS base
     ├── forms.md                   # Inputs, selects, checkboxes, radios, switches, auth screens
     ├── widgets.md                 # Stat cards, charts, kanban, pricing, invoice, file manager
-    ├── screens.md                 # Catalogue of all ~30 screens with Figma node IDs
-    └── figma-workflow.md          # When/how to call Figma MCP for live design lookups
+    ├── screens.md                 # Catalogue of all ~30 screens with content blueprints
 ```
 
 ---
 
 ## Install
 
-The `.skill` archive is just a zipped folder. Unzip it and drop the contents into the skills directory of whichever agent you use:
+Download the latest `.skill` archive from the [Releases page](https://github.com/taleilon/Ayla-Saas-Admin-UI-UX-Pro/releases), or clone the repo directly:
+
+```bash
+git clone https://github.com/taleilon/Ayla-Saas-Admin-UI-UX-Pro.git ayla-saas-admin-ui-ux-pro
+```
+
+Then move (or symlink) the folder into your agent's skills directory:
 
 | Agent | Install path |
 |---|---|
@@ -57,6 +62,15 @@ The `.skill` archive is just a zipped folder. Unzip it and drop the contents int
 
 The skill is self-contained: no scripts to run, no dependencies, no build step. Activation happens via the `description:` trigger in `SKILL.md` for skill-aware agents, or via the orientation in `AGENTS.md` for project-scope discovery.
 
+### Build the `.skill` bundle from source
+
+```bash
+cd ayla-saas-admin-ui-ux-pro
+zip -r ayla-saas-admin-ui-ux-pro.skill . -x '*.git*' -x '.github/*' -x '*.skill'
+```
+
+Or push a `vX.Y.Z` tag — the included GitHub Actions workflow (`.github/workflows/release.yml`) builds the bundle automatically and attaches it to a Release.
+
 ---
 
 ## How to invoke
@@ -67,7 +81,6 @@ The skill description is greedy on purpose. Any compatible agent will trigger it
 - "Make a SaaS console / back-office UI / internal tool for Y"
 - "I need a kanban board screen" / "design a billing page" / "draft an invoice detail view"
 - "Use the Ayla style" / "Ayla admin" / "Ayla SaaS"
-- "Use the Raple / Analytix design" (legacy reference to the source template)
 - "Make me a login screen" or any of the 30+ catalogued screens
 
 If you want a different aesthetic (dark mode trading terminal, glassmorphic dashboard, Linear-style UI), say so explicitly — the agent will skip this skill or offer to deviate.
@@ -134,22 +147,10 @@ Scale: 11 / 12 / 14 / 16 / 18 / 20 / 24 / 28 px.
 
 ---
 
-## Figma integration
-
-The skill ships with the Figma node IDs for every screen and component in `references/screens.md` and `references/figma-workflow.md`. If you have the Figma MCP connector enabled in your agent (supported by Claude Code, Codex, OpenClaw, Cursor, and others), the agent will:
-
-- Pull live screenshots when asked to "match the design"
-- Read component metadata (props, variants) directly from the source file
-- Stay in sync if the underlying template is updated
-
-If Figma MCP isn't connected, the skill works standalone — all design data is captured in the reference files.
-
----
-
 ## Versioning
 
 - **v1.0** — Initial release. 30+ screens, 6 table variants, full form set, light/black/navy chrome variants.
-  
+
 ---
 
 ## Customizing
@@ -166,4 +167,4 @@ For per-brand variants (e.g. Drip Envy in pink-purple, Brokerkey in green), keep
 
 ## License
 
-The skill structure (markdown, CSS, HTML scaffolds) is yours to use, modify, and redistribute freely. Check the source file's terms before using in commercial products.
+MIT. Use, modify, and redistribute freely. See `LICENSE` for the full text.

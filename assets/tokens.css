@@ -1,0 +1,118 @@
+/* =========================================================================
+   Ayla SaaS Admin — design tokens
+   Drop this file into any project, then build component CSS that references
+   these variables. Pairs with the patterns documented in references/.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- Color: Primary (brand blue) ---- */
+  --color-primary-50:           #F0F6FF;
+  --color-primary-100:          #CFDFF7;
+  --color-primary-200:          #9FBFF0;
+  --color-primary-300:          #6E9FE8;
+  --color-primary-500:          #005CE8;   /* main brand blue */
+  --color-primary-accent-bar:   #0E5FD9;   /* darker bars + active sidebar accent */
+
+  /* ---- Color: Semantic ---- */
+  --color-success-50:           #E7F7EF;
+  --color-success-500:          #0FAF62;
+  --color-warning-200:          #FFD599;
+  --color-danger-500:           #E84646;
+  --color-danger-50:            #FDECEC;   /* derived — for danger pills */
+
+  /* ---- Color: Neutral ---- */
+  --color-white:                #FFFFFF;
+  --color-gray-50:              #F5F6F7;
+  --color-gray-100:             #E5E7E8;
+  --color-gray-300:             #B0B7BA;
+  --color-gray-400:             #959FA3;
+  --color-gray-600:             #626C70;
+  --color-gray-700:             #4A5154;
+  --color-gray-900:             #191B1C;
+
+  /* ---- Sidebar (alternate themes) ---- */
+  --sidebar-bg-white:           var(--color-white);
+  --sidebar-bg-dark:            var(--color-gray-900);
+  --sidebar-bg-navy:            #10204A;
+
+  /* ---- Type ---- */
+  --font-family:                'Public Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  /* heading ramp */
+  --font-heading-01:            600 48px/56px var(--font-family);
+  --font-heading-02:            600 40px/48px var(--font-family);
+  --font-heading-03:            600 32px/40px var(--font-family);
+  --font-heading-04:            600 28px/36px var(--font-family);
+  --font-heading-05:            600 24px/32px var(--font-family);   /* stat numbers, page titles */
+  --font-heading-06:            600 20px/28px var(--font-family);
+
+  /* sub-headings / body / label */
+  --font-sub-02:                600 16px/23px var(--font-family);   /* card titles */
+  --font-sub-03:                600 14px/20px var(--font-family);   /* tabs, button text */
+  --font-sub-04:                600 12px/14px var(--font-family);
+
+  --font-body-large-500:        500 16px/24px var(--font-family);
+  --font-body-regular-400:      400 14px/20px var(--font-family);   /* default body */
+  --font-body-regular-500:      500 14px/20px var(--font-family);   /* sidebar nav, field labels */
+  --font-body-small-400:        400 12px/14px var(--font-family);
+
+  --font-label-regular:         500 12px/1   var(--font-family);    /* uppercase labels */
+  --font-label-tiny:            500 10px/1   var(--font-family);
+
+  /* ---- Spacing scale ---- */
+  --space-1:                    4px;
+  --space-2:                    8px;
+  --space-3:                    12px;
+  --space-4:                    16px;
+  --space-5:                    24px;
+  --space-6:                    32px;
+  --space-7:                    40px;
+
+  /* ---- Layout constants ---- */
+  --layout-sidebar-width:       280px;
+  --layout-topnav-height:       72px;
+  --layout-page-padding:        40px;
+  --layout-content-width:       1560px;
+  --layout-gap:                 24px;
+
+  /* ---- Radii ---- */
+  --radius-sm:                  4px;        /* inputs, buttons, badges, search */
+  --radius-md:                  8px;        /* cards, modals, drawers */
+  --radius-lg:                  40px;       /* stat-card bars */
+  --radius-full:                9999px;     /* avatars, switches */
+
+  /* ---- Shadows ---- */
+  --shadow-card-hover:          0 1px 2px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.04);
+  --shadow-drawer:              0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.08);
+  --overlay-modal:              rgba(0, 0, 0, 0.4);
+
+  /* ---- Misc ---- */
+  --hairline:                   1px solid var(--color-gray-100);
+  --search-input-bg:            rgba(242, 243, 244, 0.5);
+}
+
+/* =========================================================================
+   Base resets that the components in this design system assume
+   ========================================================================= */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-white);
+  color: var(--color-gray-900);
+  font: var(--font-body-regular-400);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--color-primary-500); }
+
+img, svg { display: block; max-width: 100%; }
+
+button { font-family: inherit; }

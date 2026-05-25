@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayla Admin — Starter</title>
+
+  <link rel="stylesheet" href="tokens.css">
+
+  <!-- Phosphor Icons.
+       If you can't use Phosphor in the target project, swap for Lucide. -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+  <style>
+    /* -----------------------------------------------------------
+       Page shell
+       ----------------------------------------------------------- */
+    .ayla-shell { display: flex; min-height: 100vh; background: var(--color-white); }
+    .ayla-shell__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .ayla-shell__content {
+      flex: 1;
+      padding: var(--layout-page-padding);
+      padding-top: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    /* -----------------------------------------------------------
+       Sidebar
+       ----------------------------------------------------------- */
+    .ayla-sidebar {
+      position: relative;
+      width: var(--layout-sidebar-width);
+      flex: none;
+      background: var(--sidebar-bg-white);
+      padding-top: var(--space-4);
+      box-shadow: inset -1px 0 0 0 var(--color-gray-100);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .ayla-sidebar__brand {
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 var(--space-5);
+      text-decoration: none;
+    }
+    .ayla-sidebar__logo {
+      width: 32px; height: 32px; flex: none; border-radius: 8px;
+      background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-300));
+      display: grid; place-items: center; color: white;
+    }
+    .ayla-sidebar__wordmark {
+      font: 600 24px/1 var(--font-family);
+      color: var(--color-gray-900);
+    }
+    .ayla-sidebar__nav { display: flex; flex-direction: column; gap: var(--space-5); }
+    .ayla-sidebar__section { display: flex; flex-direction: column; gap: var(--space-2); }
+    .ayla-sidebar__heading {
+      margin: 0; padding: 0 var(--space-5);
+      font: var(--font-label-regular);
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+    }
+    .ayla-sidebar__section ul {
+      list-style: none; margin: 0; padding: 0;
+      display: flex; flex-direction: column; gap: var(--space-1);
+    }
+    .ayla-sidebar__item {
+      position: relative;
+      display: flex; align-items: center; gap: var(--space-3);
+      padding: 10px var(--space-5);
+      text-decoration: none;
+      font: var(--font-body-regular-500);
+      color: var(--color-gray-600);
+    }
+    .ayla-sidebar__item i { font-size: 20px; flex: none; color: currentColor; }
+    .ayla-sidebar__item span { flex: 1; min-width: 0; }
+    .ayla-sidebar__item:hover {
+      background: var(--color-gray-50);
+      color: var(--color-gray-900);
+    }
+    .ayla-sidebar__item.is-active {
+      background: var(--color-primary-50);
+      color: var(--color-gray-900);
+      box-shadow: inset 3px 0 0 0 var(--color-primary-accent-bar);
+    }
+    .ayla-sidebar__caret { font-size: 16px !important; color: var(--color-gray-400) !important; }
+
+    /* -----------------------------------------------------------
+       Top navigation
+       ----------------------------------------------------------- */
+    .ayla-topnav {
+      position: relative;
+      height: var(--layout-topnav-height);
+      background: var(--color-white);
+      padding: var(--space-4) var(--layout-page-padding);
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: inset 0 -1px 0 0 var(--color-gray-100);
+    }
+
+    .ayla-search { position: relative; width: 240px; height: 40px; }
+    .ayla-search__icon {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      font-size: 20px; color: var(--color-gray-400); pointer-events: none;
+    }
+    .ayla-search__input {
+      width: 100%; height: 100%;
+      background: var(--search-input-bg);
+      border: 0; border-radius: var(--radius-sm);
+      padding: 10px 16px 10px 48px;
+      font: var(--font-body-regular-400); color: var(--color-gray-900);
+    }
+    .ayla-search__input::placeholder { color: var(--color-gray-400); }
+    .ayla-search__input:focus { outline: 2px solid var(--color-primary-500); outline-offset: 0; }
+
+    .ayla-topnav__cluster { display: flex; align-items: center; gap: var(--space-4); }
+    .ayla-langpill {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 32px; padding: 0 4px 0 12px;
+      background: var(--color-gray-50);
+      border: 0; border-radius: var(--radius-sm);
+      font: var(--font-body-regular-400); color: var(--color-gray-700);
+      cursor: pointer;
+    }
+    .ayla-langpill__flag { width: 16px; height: 16px; border-radius: 50%; object-fit: cover; background: var(--color-primary-200); }
+    .ayla-langpill i { font-size: 16px; color: var(--color-gray-400); }
+
+    .ayla-iconbtn {
+      position: relative; width: 20px; height: 20px;
+      background: transparent; border: 0; padding: 0;
+      color: var(--color-gray-700); cursor: pointer;
+    }
+    .ayla-iconbtn i { font-size: 20px; }
+    .ayla-iconbtn__dot {
+      position: absolute; top: 0; right: 0;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--color-danger-500);
+      box-shadow: 0 0 0 2px var(--color-white);
+    }
+
+    .ayla-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--color-warning-200);
+      border: 0; padding: 0; cursor: pointer;
+      display: grid; place-items: center;
+      color: var(--color-gray-900);
+      font: 600 14px/1 var(--font-family);
+    }
+
+    /* -----------------------------------------------------------
+       Breadcrumbs
+       ----------------------------------------------------------- */
+    .ayla-breadcrumbs {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; min-height: 51px;
+    }
+    .ayla-breadcrumbs__title { margin: 0; font: var(--font-heading-05); color: var(--color-gray-900); }
+    .ayla-breadcrumbs__trail {
+      display: flex; align-items: center; gap: 6px;
+      font: var(--font-body-regular-500); color: var(--color-gray-600);
+    }
+    .ayla-breadcrumbs__trail a { color: var(--color-gray-600); text-decoration: none; }
+    .ayla-breadcrumbs__trail .is-current { color: var(--color-gray-900); }
+
+    /* -----------------------------------------------------------
+       Card shell + buttons (minimum kit for the empty content area)
+       ----------------------------------------------------------- */
+    .ayla-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      box-shadow: 0 0 0 1px var(--color-gray-100);
+    }
+
+    .ayla-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+      height: 40px; padding: 0 var(--space-4);
+      border-radius: var(--radius-sm); border: 0;
+      font: var(--font-sub-03);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .ayla-btn--primary { background: var(--color-primary-500); color: var(--color-white); }
+    .ayla-btn--primary:hover { background: #004FC6; }
+    .ayla-btn--secondary {
+      background: var(--color-white);
+      color: var(--color-primary-500);
+      box-shadow: inset 0 0 0 1px var(--color-primary-500);
+    }
+
+    /* -----------------------------------------------------------
+       Footer
+       ----------------------------------------------------------- */
+    .ayla-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-5) var(--layout-page-padding);
+      font: var(--font-body-regular-400); color: var(--color-gray-600);
+      border-top: var(--hairline);
+    }
+    .ayla-footer p { margin: 0; }
+
+    /* -----------------------------------------------------------
+       Demo "empty content" hint
+       ----------------------------------------------------------- */
+    .ayla-empty {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: var(--space-7);
+    }
+    .ayla-empty h2 {
+      margin: 0 0 var(--space-2);
+      font: var(--font-heading-05);
+      color: var(--color-gray-900);
+    }
+    .ayla-empty p {
+      margin: 0 0 var(--space-5);
+      max-width: 480px;
+      font: var(--font-body-regular-400);
+      color: var(--color-gray-600);
+    }
+  </style>
+</head>
+<body>
+
+<div class="ayla-shell">
+  <!-- =================== SIDEBAR =================== -->
+  <aside class="ayla-sidebar" role="navigation" aria-label="Primary">
+    <a class="ayla-sidebar__brand" href="#">
+      <span class="ayla-sidebar__logo" aria-hidden="true"><i class="ph ph-diamond"></i></span>
+      <span class="ayla-sidebar__wordmark">Ayla</span>
+    </a>
+
+    <nav class="ayla-sidebar__nav">
+      <section class="ayla-sidebar__section">
+        <h3 class="ayla-sidebar__heading">Dashboard</h3>
+        <ul>
+          <li><a class="ayla-sidebar__item is-active" href="#"><i class="ph ph-house-line"></i><span>Dashboard</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-calendar-blank"></i><span>Calendar</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-clipboard-text"></i><span>Kanban Board</span><i class="ph ph-caret-down ayla-sidebar__caret"></i></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-folder-notch-open"></i><span>File Manager</span><i class="ph ph-caret-down ayla-sidebar__caret"></i></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-puzzle-piece"></i><span>Authentication</span><i class="ph ph-caret-down ayla-sidebar__caret"></i></a></li>
+        </ul>
+      </section>
+
+      <section class="ayla-sidebar__section">
+        <h3 class="ayla-sidebar__heading">Pages</h3>
+        <ul>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-user"></i><span>Profile</span><i class="ph ph-caret-down ayla-sidebar__caret"></i></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-notebook"></i><span>Invoice</span><i class="ph ph-caret-down ayla-sidebar__caret"></i></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-credit-card"></i><span>Billing</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-lightning"></i><span>Pricing Plans</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-question"></i><span>FAQs</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-note-blank"></i><span>Blank Page</span></a></li>
+        </ul>
+      </section>
+
+      <section class="ayla-sidebar__section">
+        <h3 class="ayla-sidebar__heading">Components</h3>
+        <ul>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-cards"></i><span>Card</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-list-dashes"></i><span>Table</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-swatches"></i><span>Form Elements</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-leaf"></i><span>Widgets</span></a></li>
+          <li><a class="ayla-sidebar__item" href="#"><i class="ph ph-book-open"></i><span>Documentation</span><i class="ph ph-caret-down ayla-sidebar__caret"></i></a></li>
+        </ul>
+      </section>
+    </nav>
+  </aside>
+
+  <!-- =================== MAIN COLUMN =================== -->
+  <div class="ayla-shell__main">
+
+    <!-- =================== TOP NAVIGATION =================== -->
+    <header class="ayla-topnav">
+      <div class="ayla-search">
+        <i class="ph ph-magnifying-glass ayla-search__icon" aria-hidden="true"></i>
+        <input type="search" class="ayla-search__input" placeholder="Search">
+      </div>
+
+      <div class="ayla-topnav__cluster">
+        <button class="ayla-langpill" type="button">
+          <span class="ayla-langpill__flag" aria-hidden="true"></span>
+          <span>English</span>
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+        <button class="ayla-iconbtn" aria-label="Layout"><i class="ph ph-squares-four"></i></button>
+        <button class="ayla-iconbtn" aria-label="Notifications">
+          <i class="ph ph-bell"></i>
+          <span class="ayla-iconbtn__dot" aria-hidden="true"></span>
+        </button>
+        <button class="ayla-avatar" aria-label="Account">TE</button>
+      </div>
+    </header>
+
+    <!-- =================== CONTENT =================== -->
+    <main class="ayla-shell__content">
+      <div class="ayla-breadcrumbs">
+        <h1 class="ayla-breadcrumbs__title">Dashboard</h1>
+        <nav class="ayla-breadcrumbs__trail" aria-label="Breadcrumb">
+          <a href="#">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="#">Analytics</a>
+          <span aria-hidden="true">/</span>
+          <span class="is-current" aria-current="page">Overview</span>
+        </nav>
+      </div>
+
+      <!-- ───── Drop your screen content here ─────
+           Fill this area with rows of cards/tables/widgets sized from the
+           1560px grid: 372, 504, 636, 768, 1164, or 1560. Use 24px gaps.
+           See references/screens.md for ready blueprints. -->
+      <section class="ayla-card ayla-empty">
+        <div>
+          <h2>Empty content area</h2>
+          <p>Replace this card with rows of cards/tables/widgets from <code>references/screens.md</code>. Each row should sum to 1560&nbsp;px with 24&nbsp;px gaps.</p>
+          <button class="ayla-btn ayla-btn--primary"><i class="ph ph-plus"></i> Add Widget</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- =================== FOOTER =================== -->
+    <footer class="ayla-footer">
+      <p>&copy; 2026 Ayla. All rights reserved.</p>
+      <p>v1.0.0</p>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
