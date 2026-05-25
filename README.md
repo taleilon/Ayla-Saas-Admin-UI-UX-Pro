@@ -149,7 +149,7 @@ If Figma MCP isn't connected, the skill works standalone — all design data is 
 ## Versioning
 
 - **v1.0** — Initial release. 30+ screens, 6 table variants, full form set, light/black/navy chrome variants.
-- 
+  
 ---
 
 ## Customizing
