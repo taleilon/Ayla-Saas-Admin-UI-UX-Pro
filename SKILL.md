@@ -1,6 +1,6 @@
 ---
 name: ayla-saas-admin-ui-ux-pro
-description: Build Ayla SaaS admin dashboard screens using the blue-accented admin design system: 280px sidebar, Public Sans, cards, tables, forms, auth, billing, kanban, calendar, settings, and analytics layouts. Use when the user asks for Ayla, an admin panel, back-office UI, SaaS console, internal tool, or analytics dashboard.
+description: "Build Ayla SaaS admin dashboard screens using the blue-accented admin design system: 280px sidebar, Public Sans, cards, tables, forms, auth, billing, kanban, calendar, settings, and analytics layouts. Use when the user asks for Ayla, an admin panel, back-office UI, SaaS console, internal tool, or analytics dashboard."
 compatibility:
   - claude-code
   - codex-cli
